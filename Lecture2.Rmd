@@ -1,0 +1,95 @@
+---
+title: "Simple document"
+author: "Matariya Rattanapan"
+date: 2025-09-09
+output: html_document
+---
+
+I'm an R Markdown document! 
+
+```{r echo = TRUE, message = FALSE}
+library(tidyverse)
+```
+
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+# Section 3
+
+This is where I'm going to talk about code chunks.
+
+```{r eval = FALSE}
+samp = rnorm(100)
+length(samp)
+```
+
+Let's make a dataframe.
+
+```{r}
+example.df = 
+  tibble(
+    vec_numeric = 1:4,
+    vec_char = c("my", "name", "is", "jeff"),
+    vec_factor = factor(c("male", "male", "female", "female"))
+  )
+```
+
+I'll create a new dataframe.
+```{r}
+new_df =
+  tibble(
+    x = rnorm(100),
+    y = 1 + 2 * x + rnorm(100)
+  )
+```
+
+Let's make a plot and see how cool
+
+```{r}
+plot_df = 
+  tibble(
+    x = rnorm(1000, mean = 1, sd = 0.5),
+    y = 1 + 2 * x + rnorm(1000)
+  )
+
+plot_df
+
+ggplot(plot_df, aes(x=x)) + geom_histogram()
+ggplot(plot_df, aes(x=x, y=y)) + geom_point()
+```
+
+# Learning Assessment
+
+```{r}
+la_df = 
+  tibble(
+    numeric_samp = rnorm(500, mean = 1),
+    greater_0 = numeric_samp > 0,
+    abs_value_samp = abs(numeric_samp)
+  )
+
+ggplot(la_df, aes(x= abs_value_samp)) + geom_histogram()
+```
+
+To use inline code, I would do something like: "The sample size in the new dataframe is `r nrow(la_df)`."
+
+Something more complex is "The mean of my new variable is `r mean(pull(la_df, abs_value_samp))`."
+
+# Let's look at formatting
+
+ll of this is markdown formatting
+
+`italic` or _italic_
